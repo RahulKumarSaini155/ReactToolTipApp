@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Button from "./components/Button";
+
 
 function App() {
+  const [position, setPosition] = useState("top");
+
+  const handlePosition = (pos) => {
+    const TooltopPosition = ["top", "bottom", "left", "right"];
+    const val = TooltopPosition.map(positions => positions === pos );
+
+    if(val){
+      setPosition(pos);
+    }
+    // console.log("app", position);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 className="txt">Enter Tooltip Position</h2>
+      <input onKeyUp={(e)=> handlePosition(e.target.value)} className="userInput" placeholder="top, bottom, left, right" required></input>
+
+      <Button position={position} />
     </div>
   );
 }
